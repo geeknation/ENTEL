@@ -1,0 +1,14 @@
+ENTEL LIMITED.
+SECURITY AND USER SYSTEM WIDE CLASSES BUILD
+
+REQUIREMENTS
+	SECURITY CLASS
+	1)login a user
+	2)logout a user
+	3)check a users session duration
+	
+	USER CLASS
+	1)add a users details to the database.
+	2)remove a users details from the database.
+	3)update a users details on the database.
+	4)fetch a users details from the database.
