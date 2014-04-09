@@ -5,7 +5,7 @@ require_once ("EntelDB.php");
 class EntelAuth extends EntelDB {
 	//one minute
 	private $loginDuration = "1 minute";
-	private $loginQuery = "SELECT userId,username,password FROM login WHERE username=? AND password=?";
+	public $loginQuery = "SELECT userId,username,password FROM login WHERE username=? AND password=?";
 	//the page to redirect once the login has failed
 	private $failLoginRedir;
 	//the page to redirect once the login has succeeded.
@@ -209,6 +209,10 @@ class EntelAuth extends EntelDB {
 		// Return string with times
 		return implode(", ", $times);
 	}
-
+	
+	function displayUserNavbar()
+	{
+		
+	}
 }
 ?>

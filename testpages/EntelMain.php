@@ -1,5 +1,6 @@
 <?php
 require_once("../EntelAuth.php");
+
 $user=new EntelAuth("EntelUI.php","EntelMain.php");
 $user->checkSession();
 $user->checkLoginDuration();
