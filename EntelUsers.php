@@ -19,6 +19,10 @@ class EntelUser {
 		}
 		return $randomString;
 	}
+	function genUniqId(){
+		$id=uniqid(uniqid(rand(rand(333,999), rand(3,10000))));
+		return $id;
+	}
 
 }
 ?>
