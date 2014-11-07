@@ -1,0 +1,9 @@
+.item {
+	background: linear-gradient(#59A91B, #4E9916) #59A91B;
+	
+	/*Font styling*/
+	font-family: Helvetica, Arial, sans-serif !important;
+	font-variant: normal;
+	font-weight: normal;
+	color: #ccc;
+}
