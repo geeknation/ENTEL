@@ -7,7 +7,6 @@ var EntelData = {
 		});
 		var table = $('div#jsontotable>table').DataTable({
 			responsive : true
-
 		});
 		//row data
 		$("table").on("click", "tr", function() {
@@ -15,15 +14,14 @@ var EntelData = {
 			$("table").find("tr").removeClass("success");
 
 			$(this).addClass("success");
-
+			
 			var rowData = table.row(this).data();
 			var rowIndex = table.row(this).index();
-
+			
 			//console.log(rowData);
 			//console.log(rowIndex+1);
 		});
 	},
-
 	"editTableDataUI" : function(rowData) {
 
 		var companyname = rowData[0];
@@ -31,9 +29,7 @@ var EntelData = {
 		var contactTitle = rowData[2];
 		var address = rowData[3];
 		var city = rowData[4];
-
 		$("#edit-modal").foundation('reveal', 'open');
-
 		$("#cname").val(companyname);
 		$("#conname").val(contactName);
 		$("#ctitle").val(contactTitle);
@@ -45,7 +41,6 @@ var EntelData = {
 		// });
 
 	},
-
 	"updateData" : function(form) {
 		var fields = [];
 		var keys = [];
@@ -62,9 +57,7 @@ var EntelData = {
 			console.log(data);
 		});
 	},
-
 	"deleteTableDataUI" : function(rowData) {
-
 		var message = "Are you sure you want to delete?" + rowData[1];
 		alertify.confirm(message).set('onok', function() {
 			console.log(rowData);
@@ -72,9 +65,10 @@ var EntelData = {
 		//$("#delete-modal").foundation("reveal","open");
 		//$("#delete-modal-body").append("<p>"+rowData[1]+"</p>");
 	},
-
+	
 	"deleteRow" : function() {
-
+		
+		
 	},
 	"fetchData" : function($Obj, returnAction) {
 		$.ajax({
