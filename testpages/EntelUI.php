@@ -1,5 +1,5 @@
 <?php
-require_once ("../EntelAuth.php");
+require_once("../EntelAuth.php");
  $auth=new EntelAuth("EntelUI.php","EntelMain.php");
 $auth->checkSession();
 
