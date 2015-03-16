@@ -5,7 +5,7 @@
  * Date: 3/16/2015
  * Time: 10:23 AM
  */
-include "./EntelDB.php";
+include "EntelDB.php";
 class Data extends EntelDB{
     public $conn='';
     function __construct(){
