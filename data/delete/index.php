@@ -5,10 +5,12 @@
  * Date: 3/16/2015
  * Time: 10:22 AM
  */
-include "Data.php";
+include "../Data.php";
 $DBdata=new Data();
 if(!isset($_GET['query'])){
     echo "error:please include a query your request";
 }else{
     $query=$_GET['query'];
+    $data=$DBdata->deleteRecord($query);
+    echo $data;
 }
