@@ -9,44 +9,54 @@
     <link rel="stylesheet" href="jquery.typeahead.css">
     <script type="text/javascript" src="jquery.typeahead.min.js"></script>
     <style type="text/css">
-
-        /* this is the holder div for suggestion results*/
+        .typeahead-hint{
+            padding-top:.8%;
+            padding-left:1.8%;
+        }
         .typeahead-result{
             border:solid thin #c2ccd1;
+            width:93.7%;
         }
-
-        /**/
-        .typeahead-result .row {
-            display: table-row;
+        ul.typeahead-list{
+            padding-left:1%;
         }
         .typeahead-list li{
             list-style:none;
-            padding:1%;
             border-bottom:solid thin #c2ccd1;
-
         }
         .typeahead-group{
+            background-color: #c2ccd1;
+        }
+        ul.typeahead-list > li > a{
+            overflow: hidden;
+            width: inherit !important;
+        }
+        ul.typeahead-list > li > a:hover{
+            background-color: #f8f8f8;
 
         }
-        .typeahead-group > a{
-          width:inherit;
+
+        ul.typeahead-list > li > a >span.row {
+
         }
-        .typeahead-result > ul > li > a small {
-            padding-left: 0px;
-            color: #999;
+        span.username  {
+
+            font-size:15px !important;
         }
-        .spacing{
-            padding:1%;
+        span.id{
+            color: #c2ccd1;
+            font-size:10px;
+
         }
+
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-5 col-lg-offset-4 spacing">
-            <form id="form-user_v1 form-inline" name="form-user_v1" action="">
-                <div class="typeahead-container">
-                    <div class="typeahead-field input-group">
+<div class="row">
+    <div class="col-lg-5 col-lg-offset-3">
+        <form id="form-user_v1 form-inline" name="form-user_v1" action="">
+            <div class="typeahead-container">
+                <div class="typeahead-field input-group">
                     <span class="typeahead-query">
                         <input id="user_v1-query" class="form-control" name="user_v1[query]" type="search" placeholder="Search Users" autocomplete="off">
                     </span>
@@ -56,10 +66,9 @@
                         </button>
                     </span>
 
-                    </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 <script type="text/javascript">
@@ -73,8 +82,9 @@
         backdrop: {
             "background-color": "#fff"
         },
+        cache:true,
         hint:true,
-        group: "Country",
+
         source: {
             customers: {
                 url: [{

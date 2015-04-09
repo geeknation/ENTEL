@@ -10,7 +10,7 @@ $pdo=new PDO("mysql:host=localhost;dbname=northwind;","root","");
 $datas=array();
 $query="SELECT * FROM customers WHERE ContactName LIKE :q";
 $stmt=$pdo->prepare($query);
-$stmt->execute(array("q"=>"%".$_GET['q']."%"));
+$stmt->execute(array("q"=>$_GET['q']."%"));
 $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $query2="SELECT * FROM employees WHERE FirstName LIKE :q";;
