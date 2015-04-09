@@ -9,46 +9,9 @@
     <link rel="stylesheet" href="jquery.typeahead.css">
     <script type="text/javascript" src="jquery.typeahead.min.js"></script>
     <style type="text/css">
-        .typeahead-hint{
-            padding-top:.8%;
-            padding-left:1.8%;
+        #user_v1-query{
+            height:44px;
         }
-        .typeahead-result{
-            border:solid thin #c2ccd1;
-            width:93.7%;
-        }
-        ul.typeahead-list{
-            padding-left:1%;
-        }
-        .typeahead-list li{
-            list-style:none;
-            border-bottom:solid thin #c2ccd1;
-        }
-        .typeahead-group{
-            background-color: #c2ccd1;
-        }
-        ul.typeahead-list > li > a{
-            overflow: hidden;
-            width: inherit !important;
-        }
-        ul.typeahead-list > li > a:hover{
-            background-color: #f8f8f8;
-
-        }
-
-        ul.typeahead-list > li > a >span.row {
-
-        }
-        span.username  {
-
-            font-size:15px !important;
-        }
-        span.id{
-            color: #c2ccd1;
-            font-size:10px;
-
-        }
-
     </style>
 </head>
 <body>
@@ -58,9 +21,9 @@
             <div class="typeahead-container">
                 <div class="typeahead-field input-group">
                     <span class="typeahead-query">
-                        <input id="user_v1-query" class="form-control" name="user_v1[query]" type="search" placeholder="Search Users" autocomplete="off">
+                        <input id="user_v1-query" class="" name="user_v1[query]" type="search" placeholder="Search Users" autocomplete="off">
                     </span>
-                    <span class="typeahead-button input-group-btn">
+                    <span class="typeahead-button">
                         <button type="submit" class="btn btn-default">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
@@ -75,6 +38,7 @@
 
     $('#user_v1-query').typeahead({
         minLength: 1,
+        maxItem:5,
         order: "asc",
         dynamic: true,
         delay: 500,
@@ -84,8 +48,39 @@
         },
         cache:true,
         hint:true,
-
+        group:"Country",
+        display:"username",
+        template:'<span class="row">' +
+        '<span class="avatar">' +
+        '<img src="{{picture.thumbnail}}">' +
+        "</span>" +
+        '<span class="username">{{username}}</span>' +
+        '<span class="id"><small>({{email}})</small></span>' +
+        "</span>",
         source: {
+            /*users:{
+             url:[{
+             url: ['http://api.randomuser.me/?results=100'],
+             process:function(data){
+             console.log(data);
+             console.log("_-------------------------------------------------------------------------------");
+             $users=[];
+             for(var i=0;i<data.results.length;i++){
+             $user=data.results[i].user;
+             $users.push($user);
+             }
+             data=$users;
+             console.log(data);
+             return data;
+
+
+             }
+             }]
+
+
+             }*/
+
+
             customers: {
                 url: [{
                     type: "GET",
@@ -116,7 +111,7 @@
                     }
                 },"data.employees"],
                 display:"FirstName",
-                template:'<span class="row">' +
+                template: '<span class="row">' +
                 '<span class="avatar">' +
                 '<img src="">' +
                 "</span>" +
