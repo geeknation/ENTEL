@@ -42,6 +42,7 @@ var EntelUI = {
 			},
 			success : function(Sdata) {
 				$Sdata = Sdata;
+				console.log($Sdata);
 			}
 		});
 	}
