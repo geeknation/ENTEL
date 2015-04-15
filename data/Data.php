@@ -15,7 +15,7 @@ class Data extends EntelDB{
     }
     //function to create records.
     function createRecords($sql){
-        $resp='';
+        $resp=self::queryDB($sql);
         return $resp;
     }
     //function to delete records
@@ -25,16 +25,20 @@ class Data extends EntelDB{
     }
     //function to read records
     function readRecords($sql){
+        $resp=self::queryDB($sql);
         $data='';
         return $data;
     }
     //function to update records
     function updateRecords($sql){
-        $resp=0;
+        $resp=self::queryDB($sql);
         return $resp;
     }
     //function to do the actual query
-    function queryDB(){
+    function queryDB($sql){
+
+
+
 
     }
 
