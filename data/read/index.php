@@ -8,6 +8,7 @@
 include "../Data.php";
 
 $DBdata=new Data();
+
 if(!isset($_GET['query'])){
     echo "error : please include a query your request";
 }else{
