@@ -44,25 +44,13 @@ function logout() {
 }
 function FBuser() {
   
-  FB.api('/me', function(response) {
-    console.log(response);   
-    var email = response.email;
-    var dob = response.birthday;
-    var image = 'https://graph.facebook.com/' + response.id + '/picture';
-    var firstname = response.first_name;
-    var lastname = response.last_name;
-    var name=response.name;
-    var gender = response.gender;
+  FB.api('/me', function(response) {    
+    console.log(response);
+    var $lytics=new Entelytics();
     
-    var location ='';
-    if(response.location){
-      location=response.location.name;
-    }else{
-      location="";
-    }
-    
-   
-      
-    
+    $lytics.visit(response);
+    $lytics.showProfile();
+
+
   });
 }
