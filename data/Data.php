@@ -25,8 +25,14 @@ class Data extends EntelDB{
     }
     //function to read records
     function readRecords($sql){
+<<<<<<< HEAD
         $resp=self::queryDB($sql);
         $data='';
+=======
+        $stmt=$this::$conn->prepare($sql);
+        $stmt->execute();
+        $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+>>>>>>> data-nodes
         return $data;
     }
     //function to update records
@@ -40,6 +46,17 @@ class Data extends EntelDB{
 
 
 
+    }
+    function userErrorResponse($message){
+        $data='';
+        $error="true";
+        $resp['message']=$message;
+        $resp['data']=$data;
+        $resp['error']=$error;
+        echo json_encode($resp);
+    }
+    function is_ajax() {
+      return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
     }
 
 }
