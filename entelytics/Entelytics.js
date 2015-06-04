@@ -24,6 +24,8 @@ function Entelytics() {
 			
 			$.cookie('etl-visited', true, { expires: 7, path: '/' });
 
+			$.cookie('etl-browser-profile',Entelytics.prototype.getBrowser(),{expires:7,path:"/"});
+
 		}else{
 			console.log("set");
 		}
@@ -51,6 +53,10 @@ function Entelytics() {
 	Entelytics.prototype.removeCookies=function(){
 		$.removeCookie('etl-profile');
 		
+	};
+	Entelytics.prototype.getBrowser=function(){
+		var parser = new UAParser();
+		return parser.getResult();
 	}
 }
 
