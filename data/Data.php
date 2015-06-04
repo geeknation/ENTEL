@@ -25,14 +25,16 @@ class Data extends EntelDB{
     }
     //function to read records
     function readRecords($sql){
-<<<<<<< HEAD
+
         $resp=self::queryDB($sql);
         $data='';
-=======
         $stmt=$this::$conn->prepare($sql);
         $stmt->execute();
         $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
->>>>>>> data-nodes
+        $stmt=$this::$conn->prepare($sql);
+        $stmt->execute();
+        $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
         return $data;
     }
     //function to update records
