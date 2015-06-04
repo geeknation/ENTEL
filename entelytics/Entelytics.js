@@ -2,38 +2,29 @@
  Entel Analytics script
 
  *************************
- cookie{
- name:"customer"
- value:"visited"
- }
- */
-/*
- $("body").on("load",function(){
- $(this).append('<input type="text" id="t_v">')
- });*/
+*/
 
 function Entelytics() {
 
 	Entelytics.prototype.visit = function(response) {
 		
-
 		var visitCookie = $.cookie("etl-visited");
 		var browserProfile=Entelytics.prototype.getBrowser();
 		if (typeof visitCookie=="undefined") {
 			console.log("Storing...");
 			
 
-			 $.cookie("etl-profile",response, { expires: 7, path: '/' });
+			$.cookie("etl-profile",response, { expires: 7, path: '/' });
 			
 			$.cookie('etl-visited', true, { expires: 7, path: '/' });
 
 			$.cookie('etl-browser-profile',browserProfile,{expires:7,path:"/"});
 
-			
+			Entelytics.prototype.addNewVisitor(response,browserProfile);
 
 		}else{
 			console.log("set");
-			Entelytics.prototype.addNewVisitor(response,browserProfile);
+			
 		}
 		//Entelytics.prototype.addVisit(); 
 
