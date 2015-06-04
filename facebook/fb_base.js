@@ -51,6 +51,6 @@ function FBuser() {
     $lytics.visit(response);
     $lytics.showProfile();
 
-
+    
   });
 }
