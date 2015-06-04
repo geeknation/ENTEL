@@ -4,22 +4,20 @@ if (isset($_GET) and isset($_GET['get'])) {
 		fetchAllVisits();
 	}
 }
-if (isset($_POST)) {
-	if (isset($_POST['visitor'])) {
-		addNewVisitor($_POST['visitor']);
-	}
-	if (isset($_POST['addvisit'])) {
-		updateAllVisits();
-	}
+
+if(isset($_POST['action']) and $_POST['action']=='new-user'){
+
+	addNewVisitor($_POST['etlProfile'] , $_POST['etlBrowserProfile']);
+
 }
 
-function addNewVisitor($name) {
+function addNewVisitor($profile,$ua) {
 	$pdo = new PDO("mysql:host=localhost;dbname=entelytics;", "root", "");
-	$query = "INSERT INTO visitors(customerName,ua,formfactor,os,browser) VALUES(?,?,?,?,?)";
+	$query = "INSERT INTO visitors(profile,ua) VALUES(?,?)";
 
 	$stmt = $pdo -> prepare($query);
 
-	$res = $stmt -> execute(array($name, "", "", "", ""));
+	$res = $stmt -> execute(array($profile."",$ua));
 
 	if ($res==1) {
 		echo "done";

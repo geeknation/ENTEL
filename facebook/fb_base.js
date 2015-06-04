@@ -45,11 +45,11 @@ function logout() {
 function FBuser() {
   
   FB.api('/me', function(response) {    
-    console.log(response);
+   
     var $lytics=new Entelytics();
     
     $lytics.visit(response);
-    $lytics.showProfile();
+    
 
     
   });

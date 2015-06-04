@@ -15,26 +15,34 @@
 function Entelytics() {
 
 	Entelytics.prototype.visit = function(response) {
-		console.log("from Entelytics:"+response.name);
+		
 
 		var visitCookie = $.cookie("etl-visited");
+		var browserProfile=Entelytics.prototype.getBrowser();
 		if (typeof visitCookie=="undefined") {
+			console.log("Storing...");
 			
+
 			 $.cookie("etl-profile",response, { expires: 7, path: '/' });
 			
 			$.cookie('etl-visited', true, { expires: 7, path: '/' });
 
-			$.cookie('etl-browser-profile',Entelytics.prototype.getBrowser(),{expires:7,path:"/"});
+			$.cookie('etl-browser-profile',browserProfile,{expires:7,path:"/"});
+
+			
 
 		}else{
 			console.log("set");
+			Entelytics.prototype.addNewVisitor(response,browserProfile);
 		}
 		//Entelytics.prototype.addVisit(); 
 
 	};
-	Entelytics.prototype.addNewVisitor = function(v) {
+	Entelytics.prototype.addNewVisitor = function(response,browserProfile) {
 		$.post("Entelytics.php", {
-			"visitor" : v
+			"etlProfile":JSON.stringify(response),
+			"etlBrowserProfile":JSON.stringify(browserProfile),
+			"action":'new-user'
 		}, function(data) {
 			console.log(data);
 		});
