@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Type Ahead</title>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+		<style>
+			.row {
+				padding: 3%;
+			}
+			.tt-hint{
+				color:#bbb;
+			}
+			.tt-dropdown-menu{
+				border: solid thin #EEEEEE;
+				width:100%;
+			}
+			.input[type='text']{
+				width:300px !important;
+			}
+		</style>
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="typeahead.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+
+				var searchdata = new Bloodhound({
+					datumTokenizer : Bloodhound.tokenizers.obj.whitespace('value'),
+					queryTokenizer : Bloodhound.tokenizers.obj.whitespace,
+					// prefetch:"",
+					remote : "suggestions.php?sug=%QUERY"
+
+				});
+
+				searchdata.initialize();
+				$("#remote .typeahead").typeahead(null, {
+					name : "names",
+					displayKey : "ProductName",
+					source : searchdata.ttAdapter(),
+                    templates: {
+                        empty: [
+                            '<div class="empty-message">',
+                            'unable to find any products',
+                            '</div>'
+                        ].join('\n'),
+                        suggestion: Handlebars.compile("<p><strong>{{ProductName}}</strong> – {{UnitPrice}}</p>")
+                    }
+				});
+				$("#search-button").html("<i class='glyphicon glyphicon-search'> </i>");
+                $()
+			});
+			
+		</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+	</head>
+	<body>
+		<div id="remote" class="row">
+            <div class="form-group col-lg-6">
+                <input class="typeahead form-control" type="text" id="search-query" placeholder="Search Product">
+            </div>
+            <div class="col-lg-4">
+                <button class="btn btn-success btn-lg" id="search-button"></button>
+            </div>
+
+
+		</div>
+
+	</body>
+</html>
+
