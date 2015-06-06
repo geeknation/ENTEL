@@ -15,7 +15,7 @@ class Data extends EntelDB{
     }
     //function to create records.
     function createRecords($sql){
-        $resp='';
+        $resp=self::queryDB($sql);
         return $resp;
     }
     //function to delete records
@@ -25,17 +25,40 @@ class Data extends EntelDB{
     }
     //function to read records
     function readRecords($sql){
+
+        $resp=self::queryDB($sql);
         $data='';
+        $stmt=$this::$conn->prepare($sql);
+        $stmt->execute();
+        $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt=$this::$conn->prepare($sql);
+        $stmt->execute();
+        $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+
         return $data;
     }
     //function to update records
     function updateRecords($sql){
-        $resp=0;
+        $resp=self::queryDB($sql);
         return $resp;
     }
     //function to do the actual query
-    function queryDB(){
+    function queryDB($sql){
 
+
+
+
+    }
+    function userErrorResponse($message){
+        $data='';
+        $error="true";
+        $resp['message']=$message;
+        $resp['data']=$data;
+        $resp['error']=$error;
+        echo json_encode($resp);
+    }
+    function is_ajax() {
+      return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
     }
 
 }

@@ -2,40 +2,38 @@
  Entel Analytics script
 
  *************************
- cookie{
- name:"customer"
- value:"visited"
- }
- */
-/*
- $("body").on("load",function(){
- $(this).append('<input type="text" id="t_v">')
- });*/
+*/
 
 function Entelytics() {
 
-	Entelytics.prototype.visit = function(name) {
+	Entelytics.prototype.visit = function(response) {
 		
-		var visitCookie = $.cookie(name);
-		if (visitCookie == null) {
-			//mark as new visitor
-			$.get("Entelytics.php", {
-				"get" : "all-visits"
-			}, function(data) {
-				var visitorname = "Customer" + (data+1);
-				$.cookie("visitor", visitorname, {
-					expires : 1
-				});
-				Entelytics.prototype.addNewVisitor(visitorname);
-			});
+		var visitCookie = $.cookie("etl-visited");
+		var browserProfile=Entelytics.prototype.getBrowser();
+		if (typeof visitCookie=="undefined") {
+			console.log("Storing...");
+			
 
+			$.cookie("etl-profile",response, { expires: 7, path: '/' });
+			
+			$.cookie('etl-visited', true, { expires: 7, path: '/' });
+
+			$.cookie('etl-browser-profile',browserProfile,{expires:7,path:"/"});
+
+			Entelytics.prototype.addNewVisitor(response,browserProfile);
+
+		}else{
+			console.log("set");
+			
 		}
-		Entelytics.prototype.addVisit(); 
+		//Entelytics.prototype.addVisit(); 
 
 	};
-	Entelytics.prototype.addNewVisitor = function(v) {
+	Entelytics.prototype.addNewVisitor = function(response,browserProfile) {
 		$.post("Entelytics.php", {
-			"visitor" : v
+			"etlProfile":JSON.stringify(response),
+			"etlBrowserProfile":JSON.stringify(browserProfile),
+			"action":'new-user'
 		}, function(data) {
 			console.log(data);
 		});
@@ -48,9 +46,17 @@ function Entelytics() {
 			console.log(data);
 		});
 	};
+	Entelytics.prototype.showProfile=function(){
+		console.log($.cookie());
+	}
+	Entelytics.prototype.removeCookies=function(){
+		$.removeCookie('etl-profile');
+		
+	};
+	Entelytics.prototype.getBrowser=function(){
+		var parser = new UAParser();
+		return parser.getResult();
+	}
 }
 
 
-$(document).ready(function() {
-
-});
