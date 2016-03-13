@@ -19,6 +19,7 @@ class EntelAuth extends EntelDB {
 		$this -> conn = $db -> conn;
 		$this -> failLoginRedir = $failRedir;
 		$this -> loginpassRedir = $loginpassRedir;
+
 	}
 
 	//function to login the user.

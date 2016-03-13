@@ -17,40 +17,72 @@ window.fbAsyncInit = function() {
     }
   });
 };
-( function(d) {
-    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-    if (d.getElementById(id)) {
-      return;
-    }
-    js = d.createElement('script');
-    js.id = id;
-    js.async = true;
-    js.src = "//connect.facebook.net/en_US/all.js";
-    ref.parentNode.insertBefore(js, ref);
-  }(document));
+(function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
 function FBlogin() {
   FB.login(function(response) {
     if (response.authResponse) {
       FBuser();
     } 
   }, {
-    scope : 'user_location,user_birthday'
+    scope : 'user_friends,user_birthday,user_events,user_location'
   });
 }
 function logout() {
   FB.logout(function(reponse) {
-    location.href = "signup.php";
+    location.href = "http://localhost:8080/ENTEL/facebook/me.html#";
   });
 }
 function FBuser() {
   
   FB.api('/me', function(response) {    
    
-    var $lytics=new Entelytics();
+    // var $lytics=new Entelytics();
     
-    $lytics.visit(response);
+    // $lytics.visit(response);
+    console.log(response);
+    
+
+    $(".social-auth-links").html('<button class="logout btn" onclick="logout()">Logout</button>') 
+
+    
+  });
+}
+
+function FBuserFriendlists(){
+  FB.api('/me/friendlists', function(response) {    
+    
+    console.log(response);
     
 
     
   });
 }
+
+function FBuserEvents(){
+  FB.api('/me/events', function(response) {    
+   
+    console.log(response);
+    
+
+    
+  });
+}
+
+function FBuserInterests(){
+  FB.api('/me/music', function(response) {    
+   
+    console.log(response);
+    
+
+    
+  }); 
+}
+
